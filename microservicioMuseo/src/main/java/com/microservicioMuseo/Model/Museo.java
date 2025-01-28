@@ -1,7 +1,8 @@
 package com.microservicioMuseo.Model;
 
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -11,7 +12,12 @@ public class Museo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "El nombre no puede estar vacío")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
     private String nombre;
+
+    @NotEmpty(message = "La dirección no puede estar vacía")
+    @Size(min = 5, max = 200, message = "La dirección debe tener entre 5 y 200 caracteres")
     private String direccion;
 
     @ManyToMany

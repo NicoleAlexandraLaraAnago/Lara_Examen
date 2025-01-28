@@ -1,6 +1,10 @@
 package com.microservicioCurador.Model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,13 +15,19 @@ public class Curador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "El nombre no puede estar vacío")
+    @Size(min = 2, max = 100, message = "El nombre debe tener entre 2 y 100 caracteres")
     private String nombre;
+
+    @NotEmpty(message = "El apellido no puede estar vacío")
+    @Size(min = 2, max = 100, message = "El apellido debe tener entre 2 y 100 caracteres")
     private String apellido;
 
     @ManyToMany(mappedBy = "curadores")
     private Set<Museo> museos = new HashSet<>();
 
     // Getters y Setters
+
     public Long getId() {
         return id;
     }
